@@ -1,0 +1,42 @@
+
+body {
+    background: rgb(0,36,34);
+    background: linear-gradient(90deg, rgba(0,36,34,1) 0%, rgba(189,200,214,1) 0%, rgba(0,212,255,1) 100%);
+}/*Foi feito um fundo em gradiente, toda essa configuração é gerada a partir do site: https://cssgradient.io */
+
+.texto {
+    text-align: center;
+    font-family: 'Aboreto', cursive;
+    font-size: 50px;
+    margin-bottom: 5%;
+}
+
+.conversao01, .conversao02{
+    text-align: center;
+    font-family: 'Aboreto', cursive;
+    font-size: 40px;
+    margin-bottom: 4%;
+}
+
+.val{
+    margin-left: 28%;
+    margin-bottom: 1%;
+    text-align: center;
+    font-family: 'Aboreto', cursive;
+    font-size: 40px;
+}
+
+.resultado{
+    text-align: center;
+    font-family: 'Aboreto', cursive;
+    font-size: 30px;
+    margin-bottom: 10%;
+}
+
+
+
+footer{
+    margin-top: 3%;
+    text-align: center;
+    font-family:'Times New Roman', Times, serif;
+}/*Margin só pra distanciar um pouco*/

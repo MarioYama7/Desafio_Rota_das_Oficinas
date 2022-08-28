@@ -1,0 +1,27 @@
+body {
+    background-image: url(gif01.gif);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+.titulo{
+    font-family: 'Silkscreen', cursive;
+    font-size: 50px;
+    text-align: center;
+    margin-top: 18%;
+    margin-bottom: 5%;
+}
+
+.clique{
+    font-family: 'Silkscreen', cursive;
+    font-size: 50px;
+    margin-left: 38%;
+    margin-top: 10%;
+}
+
+footer{
+    margin-top: 18%;
+    text-align: center;
+    font-family:'Times New Roman', Times, serif;
+}/*Margin só pra distanciar um pouco*/

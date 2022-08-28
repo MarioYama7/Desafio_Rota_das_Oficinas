@@ -1,0 +1,115 @@
+<html> <!--Código instruido e inspirado em https://www.youtube.com/watch?v=PMnq5s944c4&t=196s-->
+  <head> <!--A autoria do código não é minha-->
+    <title>Conway's game of life</title>
+    <style>
+      .cell {
+        width: 8px;
+        height: 8px;
+        border: 1px;
+      }
+      .filled {
+        background-color: purple; /*Cor de dentro da célula*/
+      }
+      .empty {
+        background-color: white; /*cor dos espaços vazios*/
+      }
+    </style>
+  </head>
+  <body>
+    <table id="field" style="border: 1px solid black"></table> <!--A tabela será o jogo-->
+    <script>
+      var size = 50;
+      var htmlElements;
+      var cells;
+      var EMPTY = 0;
+      var ALIVE = 1;
+
+      //função que criara as células, 50 por 50 e que inicialmente considera todas as células vazias
+
+      function createField() { 
+        htmlElements = [];
+        cells = [];
+        var table = document.getElementById('field');
+        for (var y = 0; y < size; y++) {
+          var tr = document.createElement('tr');
+          var tdElements = [];
+          cells.push(new Array(size).fill(EMPTY));
+          htmlElements.push(tdElements);
+          table.appendChild(tr);
+          for (var x = 0; x < size; x++) {
+            var td = document.createElement('td');
+            tdElements.push(td);
+            tr.appendChild(td);
+          }
+        }
+      }
+      
+      //função que desenha o campo do jogo e sincroniza os dados internos com o HTML
+
+      function draw() {
+        for (var y = 0; y < size; y++) {
+          for (var x = 0; x < size; x++) {
+            htmlElements[y][x].setAttribute('class', 'cell ' + (cells[y][x] == 1 ? 'filled' : 'empty'));
+          }
+        }
+      }
+
+      //função que calcula os vizinhos das células
+
+      function countNeibhours(x, y) {
+        var count = 0;
+        for (dy = -1; dy <= 1; dy++) {
+          for (dx = -1; dx <= 1; dx++) {
+            var nx = (x + dx + size) % size, ny = (y + dy + size) % size;
+            count = count + cells[ny][nx];
+          }
+        }
+        return count - cells[y][x];
+      }
+
+      //função de novos vizinhos das células
+
+      function newGeneration() {
+        var newCells = [];
+        for (var i = 0; i < size; i++) {
+          newCells.push(new Array(size).fill(EMPTY));
+        }
+        for (var y = 0; y < size; y++) {
+          for (var x = 0; x < size; x++) {
+            var neibhours = countNeibhours(x, y);
+            if (cells[y][x] == EMPTY && neibhours == 3) {
+              newCells[y][x] = ALIVE;
+            }
+            if (cells[y][x] == ALIVE && (neibhours == 2 || neibhours == 3)) {
+              newCells[y][x] = ALIVE;
+            }
+          }
+        }
+        cells = newCells;
+        draw();
+      }
+
+      //função de inicialização 
+
+      function init() {
+        createField();
+        for (var i = 0; i < Math.floor(size * size * 0.3); i++) {
+          var x, y;
+          do {
+            x = Math.floor(Math.random() * size), y = Math.floor(Math.random() * size);
+            if (cells[y][x] == EMPTY) {
+              cells[y][x] = ALIVE;
+              break;
+            }
+          } while (true);
+        }
+
+        //aqui redesenha o quadro das células adicionando um cronômetro.
+        draw();
+        setInterval(newGeneration, 100);
+      }
+        //Ao final se observa que as células ficam estáveis ou morrem.
+      init();
+    </script>
+  </body>
+</html>
